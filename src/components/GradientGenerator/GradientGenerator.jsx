@@ -47,9 +47,7 @@ const actions = css({
   },
 });
 
-console.log(wrapper);
-
-function App() {
+function GradientGenerator() {
   const [colors, setColors] = React.useState([
     "#FFD500",
     "#FF0040",
@@ -82,6 +80,7 @@ function App() {
 
     setNumOfVisibleColors(numOfVisibleColors - 1);
   }
+
   return (
     <div className={wrapper}>
       <div className={actions}>
@@ -123,4 +122,4 @@ function App() {
   );
 }
 
-export default App;
+export default GradientGenerator;

@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App/App.jsx";
+import App from "./components/App/App.jsx";
 import "@pigment-css/react/styles.css";
 import { css } from "@pigment-css/react";
 import { globalReset } from "./styles/reset.jsx";
