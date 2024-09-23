@@ -1,5 +1,7 @@
 import React from "react";
 import { css } from "@pigment-css/react";
+import ToastShelf from "../ToastShelf/ToastShelf";
+import { ToastContext } from "../ToastProvider/ToastProvider";
 
 const wrapper = css({
   maxWidth: "450px",
@@ -8,6 +10,8 @@ const wrapper = css({
   flexDirection: "column",
   gap: "24px",
   minWidth: "600px",
+  height: "100%",
+  justifyContent: "center",
 });
 
 const gradientPreview = css({
@@ -48,6 +52,7 @@ const actions = css({
 });
 
 function GradientGenerator() {
+  const { createToast } = React.useContext(ToastContext);
   const [colors, setColors] = React.useState([
     "#FFD500",
     "#FF0040",
@@ -65,19 +70,17 @@ function GradientGenerator() {
   //replace the alerts with a toast
   function addColor() {
     if (numOfVisibleColors >= 5) {
-      window.alert("There is a maximum of 5 colors");
+      createToast("Maximum of 5 colors", "warning");
       return;
     }
-
     setNumOfVisibleColors(numOfVisibleColors + 1);
   }
 
   function removeColor() {
     if (numOfVisibleColors <= 2) {
-      window.alert("There is a minimum of 2 colors");
+      createToast("Minimum of 2 colors", "warning");
       return;
     }
-
     setNumOfVisibleColors(numOfVisibleColors - 1);
   }
 
@@ -87,7 +90,7 @@ function GradientGenerator() {
         <button onClick={removeColor}>Remove color</button>
         <button onClick={addColor}>Add color</button>
       </div>
-
+      <ToastShelf />
       <div
         className={gradientPreview}
         style={{
