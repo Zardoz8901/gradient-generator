@@ -2,6 +2,7 @@ import React from "react";
 import { css } from "@pigment-css/react";
 import ToastShelf from "../ToastShelf/ToastShelf";
 import { ToastContext } from "../ToastProvider/ToastProvider";
+import HandleColor from "./HandleColor";
 
 const wrapper = css({
   maxWidth: "450px",
@@ -26,19 +27,6 @@ const colorSelection = css({
   flexWrap: "wrap",
   gap: "16px",
   color: "#D3D3D3",
-});
-
-const colorWrapper = css({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  "& label": {
-    display: "block",
-  },
-  "& input[type='color']": {
-    width: "75px",
-    height: "75px",
-  },
 });
 
 const actions = css({
@@ -67,7 +55,6 @@ function GradientGenerator() {
   const colorStops = visibleColors.join(", ");
   const backgroundImage = `linear-gradient(${colorStops})`;
 
-  //replace the alerts with a toast
   function addColor() {
     if (numOfVisibleColors >= 5) {
       createToast("Maximum of 5 colors", "warning");
@@ -99,27 +86,7 @@ function GradientGenerator() {
       />
 
       <div className={colorSelection}>
-        {visibleColors.map((color, index) => {
-          const colorId = `color-${index}`;
-          return (
-            <div key={colorId} className={colorWrapper}>
-              <label htmlFor={colorId}>Color {index + 1}:</label>
-              <div className="input-wrapper">
-                <input
-                  id={colorId}
-                  type="color"
-                  value={color}
-                  onChange={(event) => {
-                    const nextColors = [...colors];
-                    nextColors[index] = event.target.value;
-
-                    setColors(nextColors);
-                  }}
-                />
-              </div>
-            </div>
-          );
-        })}
+        <HandleColor colors={visibleColors} setColors={setColors} />
       </div>
     </div>
   );
