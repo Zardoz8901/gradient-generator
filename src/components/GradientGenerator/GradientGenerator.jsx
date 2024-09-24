@@ -23,7 +23,7 @@ const gradientPreview = css({
 
 const colorSelection = css({
   display: "flex",
-  justifyContent: "flex-start",
+  justifyContent: "space-between",
   flexWrap: "wrap",
   gap: "16px",
   color: "#D3D3D3",
@@ -44,9 +44,9 @@ function GradientGenerator() {
   const [colors, setColors] = React.useState([
     "#FFD500",
     "#FF0040",
-    "#FF0040",
-    "#FF0040",
-    "#FF0040",
+    "#FF0000",
+    "#FF0000",
+    "#FF0000",
   ]);
   const [numOfVisibleColors, setNumOfVisibleColors] = React.useState(2);
 
@@ -75,7 +75,6 @@ function GradientGenerator() {
     <div className={wrapper}>
       <div className={actions}>
         <button onClick={removeColor}>Remove color</button>
-        <button onClick={addColor}>Add color</button>
       </div>
       <ToastShelf />
       <div
@@ -86,7 +85,13 @@ function GradientGenerator() {
       />
 
       <div className={colorSelection}>
-        <HandleColor colors={visibleColors} setColors={setColors} />
+        <HandleColor
+          colors={colors}
+          setColors={setColors}
+          visibleColors={visibleColors}
+          numOfVisibleColors={numOfVisibleColors}
+          addColor={addColor}
+        />
       </div>
     </div>
   );
