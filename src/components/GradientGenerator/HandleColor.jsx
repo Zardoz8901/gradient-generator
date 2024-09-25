@@ -74,7 +74,6 @@ function HandleColor({
                   style={{
                     cursor:
                       index === numOfVisibleColors ? "pointer" : "default",
-                    gi,
                   }}
                 >
                   {index === numOfVisibleColors && (

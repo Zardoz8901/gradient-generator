@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import useEscapeKey from "../../hooks/useEscapeKey";
 export const ToastContext = React.createContext();
@@ -18,6 +19,18 @@ function ToastProvider({ children }) {
   }, []);
 
   useEscapeKey(() => handleEscape());
+
+  React.useEffect(() => {
+    const timers = toasts.map(
+      (toast) =>
+        setTimeout(() => {
+          dismissToast(toast.id);
+        }, 3000),
+      console.log("timer")
+    );
+
+    return () => timers.forEach(clearTimeout);
+  }, [toasts, dismissToast]);
 
   function createToast(message, notification) {
     const nextToasts = [
